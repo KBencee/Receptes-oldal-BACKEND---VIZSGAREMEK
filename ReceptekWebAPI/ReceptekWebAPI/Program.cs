@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ReceptekWebAPI.Data;
+using ReceptekWebAPI.Services;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<UserDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("UserDatabase"))
 );
+
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
