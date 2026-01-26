@@ -8,5 +8,7 @@
         public string Role { get; set; } = string.Empty;
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
+
+        public ICollection<Recept> Receptek { get; set; } = new List<Recept>();
     }
 }
