@@ -12,5 +12,7 @@
 
         public Guid UserId { get; set; }
         public User? User { get; set; }
+
+        public ICollection<ReceptCimke> ReceptCimkek { get; set; } = new List<ReceptCimke>();
     }
 }

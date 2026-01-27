@@ -184,6 +184,284 @@
         }
       }
     },
+    "/api/Cimkek": {
+      "post": {
+        "tags": [
+          "Cimkek"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CimkeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CimkeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CimkeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cimke"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cimke"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cimke"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Cimkek/{id}": {
+      "get": {
+        "tags": [
+          "Cimkek"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cimke"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cimke"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cimke"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ReceptCimke": {
+      "post": {
+        "tags": [
+          "ReceptCimke"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceptCimkeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceptCimkeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceptCimkeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceptCimke"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceptCimke"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceptCimke"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ReceptCimke/{receptId}/{cimkeId}": {
+      "get": {
+        "tags": [
+          "ReceptCimke"
+        ],
+        "parameters": [
+          {
+            "name": "receptId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "cimkeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceptCimke"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceptCimke"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceptCimke"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Recept": {
+      "post": {
+        "tags": [
+          "Recept"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceptDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceptDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReceptDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Recept"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Recept"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Recept"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Recept/{id}": {
+      "get": {
+        "tags": [
+          "Recept"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Recept"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Recept"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Recept"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/WeatherForecast": {
       "get": {
         "tags": [
@@ -226,6 +504,174 @@
   },
   "components": {
     "schemas": {
+      "Cimke": {
+        "type": "object",
+        "properties": {
+          "cimkeId": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "cimkeNev": {
+            "type": "string"
+          },
+          "receptCimkek": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReceptCimke"
+            }
+          }
+        }
+      },
+      "CimkeDto": {
+        "type": "object",
+        "properties": {
+          "cimkeNev": {
+            "type": "string"
+          }
+        }
+      },
+      "Recept": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nev": {
+            "type": "string"
+          },
+          "leiras": {
+            "type": "string"
+          },
+          "hozzavalok": {
+            "type": "string"
+          },
+          "elkeszitesiIdo": {
+            "type": "string"
+          },
+          "nehezsegiSzint": {
+            "type": "string"
+          },
+          "likes": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "user": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ]
+          },
+          "receptCimkek": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReceptCimke"
+            }
+          }
+        }
+      },
+      "ReceptCimke": {
+        "type": "object",
+        "properties": {
+          "receptId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "recept": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Recept"
+              }
+            ]
+          },
+          "cimkeId": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "cimke": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Cimke"
+              }
+            ]
+          }
+        }
+      },
+      "ReceptCimkeDto": {
+        "type": "object",
+        "properties": {
+          "receptId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "cimkeId": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "ReceptDto": {
+        "type": "object",
+        "properties": {
+          "nev": {
+            "type": "string"
+          },
+          "leiras": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "hozzavalok": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "elkeszitesiIdo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "nehezsegiSzint": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "RefreshTokenRequestDto": {
         "required": [
           "refreshToken"
@@ -284,6 +730,12 @@
               "string"
             ],
             "format": "date-time"
+          },
+          "receptek": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recept"
+            }
           }
         }
       },
@@ -334,6 +786,15 @@
   "tags": [
     {
       "name": "Auth"
+    },
+    {
+      "name": "Cimkek"
+    },
+    {
+      "name": "ReceptCimke"
+    },
+    {
+      "name": "Recept"
     },
     {
       "name": "WeatherForecast"
