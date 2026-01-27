@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ReceptekWebAPI.Data;
 using ReceptekWebAPI.Entities;
 using ReceptekWebAPI.Models;
@@ -37,6 +38,31 @@ namespace ReceptekWebAPI.Controllers
             };
 
             _context.Receptek.Add(recept);
+
+            if (dto.CimkeIds != null && dto.CimkeIds.Any())
+            {
+                var uniqueIds = dto.CimkeIds.Distinct().ToList();
+
+                var existingTagIds = await _context.Cimkek
+                    .Where(c => uniqueIds.Contains(c.CimkeId))
+                    .Select(c => c.CimkeId)
+                    .ToListAsync();
+
+                if (existingTagIds.Count != uniqueIds.Count)
+                {
+                    return BadRequest("One or more provided CimkeIds do not exist.");
+                }
+
+                foreach (var cimkeId in uniqueIds)
+                {
+                    _context.ReceptCimkek.Add(new ReceptCimke
+                    {
+                        ReceptId = recept.Id,
+                        CimkeId = cimkeId
+                    });
+                }
+            }
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetById), new { id = recept.Id }, recept);
