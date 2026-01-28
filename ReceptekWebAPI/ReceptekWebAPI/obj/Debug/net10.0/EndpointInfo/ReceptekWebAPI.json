@@ -551,7 +551,12 @@
             "type": "string"
           },
           "elkeszitesiIdo": {
-            "type": "string"
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
           },
           "nehezsegiSzint": {
             "type": "string"
@@ -644,27 +649,37 @@
         "type": "object",
         "properties": {
           "nev": {
+            "maxLength": 200,
+            "minLength": 1,
             "type": "string"
           },
           "leiras": {
+            "maxLength": 2000,
+            "minLength": 0,
             "type": [
               "null",
               "string"
             ]
           },
           "hozzavalok": {
+            "maxLength": 2000,
+            "minLength": 0,
             "type": [
               "null",
               "string"
             ]
           },
           "elkeszitesiIdo": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
             "type": [
-              "null",
+              "integer",
               "string"
-            ]
+            ],
+            "format": "int32"
           },
           "nehezsegiSzint": {
+            "maxLength": 50,
+            "minLength": 0,
             "type": [
               "null",
               "string"

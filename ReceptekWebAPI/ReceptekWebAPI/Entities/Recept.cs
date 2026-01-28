@@ -6,7 +6,7 @@
         public string Nev { get; set; }
         public string Leiras { get; set; }
         public string Hozzavalok { get; set; }
-        public string ElkeszitesiIdo { get; set; }
+        public int ElkeszitesiIdo { get; set; }
         public string NehezsegiSzint { get; set; }
         public int Likes { get; set; }
 

@@ -31,7 +31,7 @@ namespace ReceptekWebAPI.Controllers
                 Nev = dto.Nev,
                 Leiras = dto.Leiras ?? string.Empty,
                 Hozzavalok = dto.Hozzavalok ?? string.Empty,
-                ElkeszitesiIdo = dto.ElkeszitesiIdo ?? string.Empty,
+                ElkeszitesiIdo = dto.ElkeszitesiIdo,
                 NehezsegiSzint = dto.NehezsegiSzint ?? string.Empty,
                 Likes = 0,
                 UserId = userId
