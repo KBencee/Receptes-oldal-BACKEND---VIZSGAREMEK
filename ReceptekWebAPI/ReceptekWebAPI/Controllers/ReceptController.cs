@@ -71,7 +71,11 @@ namespace ReceptekWebAPI.Controllers
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<Recept>> GetById(Guid id)
         {
-            var r = await _context.Receptek.FindAsync(id);
+            var r = await _context.Receptek
+                .Include(r => r.ReceptCimkek)
+                .ThenInclude(rc => rc.Cimke)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
             if (r is null) return NotFound();
             return Ok(r);
         }
