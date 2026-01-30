@@ -150,38 +150,6 @@
     ]
   },
   {
-    "ContainingType": "ReceptekWebAPI.Controllers.MentettReceptekController",
-    "Method": "ReceptMentese",
-    "RelativePath": "api/MentettReceptek/{receptId}/save",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "receptId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ReceptekWebAPI.Controllers.MentettReceptekController",
-    "Method": "MentettReceptTorlese",
-    "RelativePath": "api/MentettReceptek/{receptId}/save",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "receptId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
     "Method": "Create",
     "RelativePath": "api/Recept",
@@ -309,6 +277,38 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ReceptekWebAPI.Controllers.MentettReceptekController",
+    "Method": "ReceptMentese",
+    "RelativePath": "saved/{receptId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receptId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekWebAPI.Controllers.MentettReceptekController",
+    "Method": "MentettReceptTorlese",
+    "RelativePath": "saved/{receptId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receptId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ReceptekWebAPI.Controllers.WeatherForecastController",

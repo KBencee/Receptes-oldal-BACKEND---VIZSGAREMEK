@@ -274,7 +274,7 @@
         }
       }
     },
-    "/api/MentettReceptek/{receptId}/save": {
+    "/saved/{receptId}": {
       "post": {
         "tags": [
           "MentettReceptek"

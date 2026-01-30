@@ -8,9 +8,10 @@ using System.Security.Claims;
 
 namespace ReceptekWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/saved")]
     [ApiController]
-    public class MentettReceptekController : Controller
+    [Authorize]
+    public class MentettReceptekController : ControllerBase
     {
         private readonly UserDbContext _context;
 
@@ -19,7 +20,7 @@ namespace ReceptekWebAPI.Controllers
             _context = context;
         }
 
-        [HttpPost("{receptId:guid}/save")]
+        [HttpPost("/saved/{receptId:guid}")]
         public async Task<IActionResult> ReceptMentese(Guid receptId)
         {
             var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -43,7 +44,8 @@ namespace ReceptekWebAPI.Controllers
             _context.MentettReceptek.Add(new MentettRecept
             {
                 UserId = userId,
-                ReceptId = receptId
+                ReceptId = receptId,
+                MentveEkkor = DateTime.UtcNow
             });
 
             await _context.SaveChangesAsync();
@@ -51,7 +53,7 @@ namespace ReceptekWebAPI.Controllers
             return Ok();
         }
 
-        [HttpDelete("{receptId:guid}/save")]
+        [HttpDelete("/saved/{receptId:guid}")]
         public async Task<IActionResult> MentettReceptTorlese(Guid receptId)
         {
             var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
