@@ -14,5 +14,6 @@
         public User? User { get; set; }
 
         public ICollection<ReceptCimke> ReceptCimkek { get; set; } = new List<ReceptCimke>();
+        public ICollection<MentettRecept> MentettByUsers { get; set; } = [];
     }
 }

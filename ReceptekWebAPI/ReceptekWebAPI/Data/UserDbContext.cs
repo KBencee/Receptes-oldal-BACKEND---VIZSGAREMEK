@@ -9,6 +9,7 @@ namespace ReceptekWebAPI.Data
         public DbSet<Recept> Receptek { get; set; } = null!;
         public DbSet<Cimke> Cimkek { get; set; } = null!;
         public DbSet<ReceptCimke> ReceptCimkek { get; set; } = null!;
+        public DbSet<MentettRecept> MentettReceptek { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +31,19 @@ namespace ReceptekWebAPI.Data
                 .HasOne(rc => rc.Cimke)
                 .WithMany(c => c.ReceptCimkek)
                 .HasForeignKey(rc => rc.CimkeId);
+
+            modelBuilder.Entity<MentettRecept>()
+                .HasKey(mr => new { mr.UserId, mr.ReceptId });
+
+            modelBuilder.Entity<MentettRecept>()
+                .HasOne(mr => mr.User)
+                .WithMany(u => u.MentettReceptek)
+                .HasForeignKey(mr => mr.UserId);
+
+            modelBuilder.Entity<MentettRecept>()
+                .HasOne(mr => mr.Recept)
+                .WithMany()
+                .HasForeignKey(mr => mr.ReceptId);
 
             base.OnModelCreating(modelBuilder);
         }

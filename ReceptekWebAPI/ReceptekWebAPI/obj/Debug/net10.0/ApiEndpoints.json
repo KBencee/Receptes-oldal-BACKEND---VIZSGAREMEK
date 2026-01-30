@@ -150,6 +150,38 @@
     ]
   },
   {
+    "ContainingType": "ReceptekWebAPI.Controllers.MentettReceptekController",
+    "Method": "ReceptMentese",
+    "RelativePath": "api/MentettReceptek/{receptId}/save",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receptId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekWebAPI.Controllers.MentettReceptekController",
+    "Method": "MentettReceptTorlese",
+    "RelativePath": "api/MentettReceptek/{receptId}/save",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receptId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
     "Method": "Create",
     "RelativePath": "api/Recept",
@@ -191,7 +223,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ReceptekWebAPI.Entities.Recept",
+        "Type": "ReceptekWebAPI.Models.ReceptResponseDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -249,6 +281,26 @@
     "ReturnTypes": [
       {
         "Type": "ReceptekWebAPI.Entities.ReceptCimke",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReceptekWebAPI.Controllers.MentettReceptekController",
+    "Method": "GetMySaved",
+    "RelativePath": "api/user/me/saved",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[ReceptekWebAPI.Models.MentettReceptResponseDto, ReceptekWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

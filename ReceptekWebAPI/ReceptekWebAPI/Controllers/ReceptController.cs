@@ -69,15 +69,37 @@ namespace ReceptekWebAPI.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<Recept>> GetById(Guid id)
+        [Authorize]
+        public async Task<ActionResult<ReceptResponseDto>> GetById(Guid id)
         {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Guid? userId = Guid.TryParse(userIdStr, out var u) ? u : null;
+
             var r = await _context.Receptek
                 .Include(r => r.ReceptCimkek)
                 .ThenInclude(rc => rc.Cimke)
                 .FirstOrDefaultAsync(r => r.Id == id);
 
             if (r is null) return NotFound();
-            return Ok(r);
+            
+            var mentveVan = userId != null && await _context.MentettReceptek
+                .AnyAsync(mr => mr.ReceptId == r.Id && mr.UserId == userId);
+
+            var response = new ReceptResponseDto
+            {
+                Id = r.Id,
+                Nev = r.Nev,
+                Leiras = r.Leiras,
+                Hozzavalok = r.Hozzavalok,
+                ElkeszitesiIdo = r.ElkeszitesiIdo,
+                NehezsegiSzint = r.NehezsegiSzint,
+                Likes = r.Likes,
+                FeltoltoUsername = (await _context.Users.FindAsync(r.UserId))?.Username ?? "Unknown",
+                Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                MentveVan = mentveVan
+            };
+
+            return Ok(response);
         }
     }
 }

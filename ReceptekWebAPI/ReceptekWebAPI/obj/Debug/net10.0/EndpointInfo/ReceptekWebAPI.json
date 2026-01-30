@@ -274,6 +274,88 @@
         }
       }
     },
+    "/api/MentettReceptek/{receptId}/save": {
+      "post": {
+        "tags": [
+          "MentettReceptek"
+        ],
+        "parameters": [
+          {
+            "name": "receptId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MentettReceptek"
+        ],
+        "parameters": [
+          {
+            "name": "receptId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/user/me/saved": {
+      "get": {
+        "tags": [
+          "MentettReceptek"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MentettReceptResponseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MentettReceptResponseDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MentettReceptResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ReceptCimke": {
       "post": {
         "tags": [
@@ -444,17 +526,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Recept"
+                  "$ref": "#/components/schemas/ReceptResponseDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Recept"
+                  "$ref": "#/components/schemas/ReceptResponseDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Recept"
+                  "$ref": "#/components/schemas/ReceptResponseDto"
                 }
               }
             }
@@ -534,6 +616,31 @@
           }
         }
       },
+      "MentettRecept": { },
+      "MentettReceptResponseDto": {
+        "type": "object",
+        "properties": {
+          "receptId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nev": {
+            "type": "string"
+          },
+          "likes": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "mentveEkkor": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "Recept": {
         "type": "object",
         "properties": {
@@ -587,6 +694,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ReceptCimke"
+            }
+          },
+          "mentettByUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MentettRecept"
             }
           }
         }
@@ -646,6 +759,9 @@
         }
       },
       "ReceptDto": {
+        "required": [
+          "nev"
+        ],
         "type": "object",
         "properties": {
           "nev": {
@@ -670,6 +786,8 @@
             ]
           },
           "elkeszitesiIdo": {
+            "maximum": 1440,
+            "minimum": 1,
             "pattern": "^-?(?:0|[1-9]\\d*)$",
             "type": [
               "integer",
@@ -698,6 +816,64 @@
               ],
               "format": "int32"
             }
+          }
+        }
+      },
+      "ReceptResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nev": {
+            "type": "string"
+          },
+          "leiras": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "hozzavalok": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "elkeszitesiIdo": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "nehezsegiSzint": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "likes": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "feltoltoUsername": {
+            "type": "string"
+          },
+          "cimkek": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mentveVan": {
+            "type": "boolean"
           }
         }
       },
@@ -765,6 +941,12 @@
             "items": {
               "$ref": "#/components/schemas/Recept"
             }
+          },
+          "mentettReceptek": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MentettRecept"
+            }
           }
         }
       },
@@ -818,6 +1000,9 @@
     },
     {
       "name": "Cimkek"
+    },
+    {
+      "name": "MentettReceptek"
     },
     {
       "name": "ReceptCimke"
