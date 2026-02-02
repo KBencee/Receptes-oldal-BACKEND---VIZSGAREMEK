@@ -28,7 +28,14 @@ namespace ReceptekWebAPI.Controllers
                 return BadRequest("User already exists.");
             }
 
-            return Ok(user);
+            var response = new UserResponseDto
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Role = user.Role
+            };
+
+            return Ok(response);
         }
 
         [HttpPost("login")]

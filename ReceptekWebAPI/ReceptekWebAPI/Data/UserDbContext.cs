@@ -42,7 +42,7 @@ namespace ReceptekWebAPI.Data
 
             modelBuilder.Entity<MentettRecept>()
                 .HasOne(mr => mr.Recept)
-                .WithMany()
+                .WithMany(r => r.MentettReceptek)
                 .HasForeignKey(mr => mr.ReceptId);
 
             base.OnModelCreating(modelBuilder);

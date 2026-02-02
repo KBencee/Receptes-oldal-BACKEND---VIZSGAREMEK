@@ -4,7 +4,9 @@ namespace ReceptekWebAPI.Models
 {
     public class CimkeDto
     {
-        public string CimkeNev { get; set; }
+        [Required]
+        [StringLength(100, MinimumLength = 1)]
+        public string CimkeNev { get; set; } = string.Empty;
     }
 
     public class ReceptCimkeDto

@@ -202,6 +202,26 @@
     ]
   },
   {
+    "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
+    "Method": "GetAll",
+    "RelativePath": "api/Recept/recept",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[ReceptekWebAPI.Entities.Recept, ReceptekWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "ReceptekWebAPI.Controllers.ReceptCimkeController",
     "Method": "Create",
     "RelativePath": "api/ReceptCimke",

@@ -12,7 +12,7 @@
 
         public string FeltoltoUsername { get; set; } = string.Empty;
 
-        public List<string> Cimkek { get; set; } = [];
+        public List<string> Cimkek { get; set; } = new List<string>();
         public bool MentveVan { get; set; }
     }
 }

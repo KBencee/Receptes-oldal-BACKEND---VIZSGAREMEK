@@ -65,11 +65,31 @@ namespace ReceptekWebAPI.Controllers
 
             await _context.SaveChangesAsync();
 
+            var r = await _context.Receptek
+                .Include(x => x.ReceptCimkek)
+                    .ThenInclude(rc => rc.Cimke)
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.Id == recept.Id);
+
+            var response = new ReceptResponseDto
+            {
+                Id = r!.Id,
+                Nev = r.Nev,
+                Leiras = r.Leiras,
+                Hozzavalok = r.Hozzavalok,
+                ElkeszitesiIdo = r.ElkeszitesiIdo,
+                NehezsegiSzint = r.NehezsegiSzint,
+                Likes = r.Likes,
+                FeltoltoUsername = r.User?.Username ?? "Unknown",
+                Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                MentveVan = false
+            };
+
             return CreatedAtAction(nameof(GetById), new { id = recept.Id }, recept);
         }
 
         [HttpGet("{id:guid}")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<ActionResult<ReceptResponseDto>> GetById(Guid id)
         {
             var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -100,6 +120,33 @@ namespace ReceptekWebAPI.Controllers
             };
 
             return Ok(response);
+        }
+
+        [HttpGet("recept")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<Recept>>> GetAll()
+        {
+            var recepts = await _context.Receptek
+                .Include(r => r.ReceptCimkek)
+                    .ThenInclude(rc => rc.Cimke)
+                .Include(r => r.User)
+                .ToListAsync();
+
+            var responses = recepts.Select(r => new ReceptResponseDto
+            {
+                Id = r.Id,
+                Nev = r.Nev,
+                Leiras = r.Leiras,
+                Hozzavalok = r.Hozzavalok,
+                ElkeszitesiIdo = r.ElkeszitesiIdo,
+                NehezsegiSzint = r.NehezsegiSzint,
+                Likes = r.Likes,
+                FeltoltoUsername = r.User?.Username ?? "Unknown",
+                Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                MentveVan = false
+            }).ToList();
+
+            return Ok(recepts);
         }
     }
 }

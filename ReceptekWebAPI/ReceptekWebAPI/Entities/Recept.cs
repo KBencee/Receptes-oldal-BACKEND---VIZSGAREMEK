@@ -3,17 +3,17 @@
     public class Recept
     {
         public Guid Id { get; set; }
-        public string Nev { get; set; }
-        public string Leiras { get; set; }
-        public string Hozzavalok { get; set; }
+        public string Nev { get; set; } = string.Empty;
+        public string Leiras { get; set; } = string.Empty;
+        public string Hozzavalok { get; set; } = string.Empty;
         public int ElkeszitesiIdo { get; set; }
-        public string NehezsegiSzint { get; set; }
+        public string NehezsegiSzint { get; set; } = string.Empty;
         public int Likes { get; set; }
 
         public Guid UserId { get; set; }
         public User? User { get; set; }
 
         public ICollection<ReceptCimke> ReceptCimkek { get; set; } = new List<ReceptCimke>();
-        public ICollection<MentettRecept> MentettByUsers { get; set; } = [];
+        public ICollection<MentettRecept> MentettReceptek { get; set; } = new List<MentettRecept>();
     }
 }

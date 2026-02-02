@@ -37,15 +37,18 @@ namespace ReceptekWebAPI.Controllers
             _context.ReceptCimkek.Add(entity);
             await _context.SaveChangesAsync();
 
+            var response = new ReceptCimkeDto { ReceptId = entity.ReceptId, CimkeId = entity.CimkeId };
             return CreatedAtAction(nameof(GetByIds), new { receptId = entity.ReceptId, cimkeId = entity.CimkeId }, entity);
         }
 
         [HttpGet("{receptId:guid}/{cimkeId:int}")]
+        [AllowAnonymous]
         public async Task<ActionResult<ReceptCimke>> GetByIds(Guid receptId, int cimkeId)
         {
             var rc = await _context.ReceptCimkek.FindAsync(receptId, cimkeId);
             if (rc is null) return NotFound();
-            return Ok(rc);
+            var dto = new ReceptCimkeDto { ReceptId = rc.ReceptId, CimkeId = rc.CimkeId };
+            return Ok(dto);
         }
     }
 }

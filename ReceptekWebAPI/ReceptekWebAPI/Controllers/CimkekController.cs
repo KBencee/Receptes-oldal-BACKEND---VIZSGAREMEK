@@ -23,15 +23,18 @@ namespace ReceptekWebAPI.Controllers
             _context.Cimkek.Add(cimke);
             await _context.SaveChangesAsync();
 
+            var response = new CimkeDto { CimkeNev = cimke.CimkeNev };
             return CreatedAtAction(nameof(GetById), new { id = cimke.CimkeId }, cimke);
         }
 
         [HttpGet("{id:int}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Cimke>> GetById(int id)
         {
             var c = await _context.Cimkek.FindAsync(id);
             if (c is null) return NotFound();
-            return Ok(c);
+            var dto = new CimkeDto { CimkeNev = c.CimkeNev };
+            return Ok(dto);
         }
     }
 }

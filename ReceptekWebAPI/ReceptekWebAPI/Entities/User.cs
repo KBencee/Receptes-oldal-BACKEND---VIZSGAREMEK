@@ -10,6 +10,6 @@
         public DateTime? RefreshTokenExpiryTime { get; set; }
 
         public ICollection<Recept> Receptek { get; set; } = new List<Recept>();
-        public ICollection<MentettRecept> MentettReceptek { get; set; } = [];
+        public ICollection<MentettRecept> MentettReceptek { get; set; } = new List<MentettRecept>();
     }
 }
