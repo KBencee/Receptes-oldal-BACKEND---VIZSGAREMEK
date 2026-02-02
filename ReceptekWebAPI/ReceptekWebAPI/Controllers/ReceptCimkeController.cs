@@ -16,7 +16,7 @@ namespace ReceptekWebAPI.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<ReceptCimke>> Create([FromBody] ReceptCimkeDto dto)
+        public async Task<ActionResult<ReceptCimkeDto>> Create([FromBody] ReceptCimkeDto dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -43,7 +43,7 @@ namespace ReceptekWebAPI.Controllers
 
         [HttpGet("{receptId:guid}/{cimkeId:int}")]
         [AllowAnonymous]
-        public async Task<ActionResult<ReceptCimke>> GetByIds(Guid receptId, int cimkeId)
+        public async Task<ActionResult<ReceptCimkeDto>> GetByIds(Guid receptId, int cimkeId)
         {
             var rc = await _context.ReceptCimkek.FindAsync(receptId, cimkeId);
             if (rc is null) return NotFound();

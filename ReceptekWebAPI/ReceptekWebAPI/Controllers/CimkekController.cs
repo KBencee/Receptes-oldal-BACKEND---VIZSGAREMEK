@@ -15,7 +15,7 @@ namespace ReceptekWebAPI.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Cimke>> Create([FromBody] CimkeDto dto)
+        public async Task<ActionResult<CimkeDto>> Create([FromBody] CimkeDto dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -29,7 +29,7 @@ namespace ReceptekWebAPI.Controllers
 
         [HttpGet("{id:int}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Cimke>> GetById(int id)
+        public async Task<ActionResult<CimkeDto>> GetById(int id)
         {
             var c = await _context.Cimkek.FindAsync(id);
             if (c is null) return NotFound();

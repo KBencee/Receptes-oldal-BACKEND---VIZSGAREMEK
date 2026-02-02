@@ -17,7 +17,7 @@ namespace ReceptekWebAPI.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Recept>> Create([FromBody] ReceptDto dto)
+        public async Task<ActionResult<ReceptResponseDto>> Create([FromBody] ReceptDto dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -123,7 +123,7 @@ namespace ReceptekWebAPI.Controllers
 
         [HttpGet("recept")]
         [AllowAnonymous]
-        public async Task<ActionResult<List<Recept>>> GetAll()
+        public async Task<ActionResult<List<ReceptResponseDto>>> GetAll()
         {
             var recepts = await _context.Receptek
                 .Include(r => r.ReceptCimkek)

@@ -215,17 +215,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cimke"
+                  "$ref": "#/components/schemas/CimkeDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cimke"
+                  "$ref": "#/components/schemas/CimkeDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cimke"
+                  "$ref": "#/components/schemas/CimkeDto"
                 }
               }
             }
@@ -256,17 +256,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cimke"
+                  "$ref": "#/components/schemas/CimkeDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cimke"
+                  "$ref": "#/components/schemas/CimkeDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cimke"
+                  "$ref": "#/components/schemas/CimkeDto"
                 }
               }
             }
@@ -387,17 +387,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceptCimke"
+                  "$ref": "#/components/schemas/ReceptCimkeDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceptCimke"
+                  "$ref": "#/components/schemas/ReceptCimkeDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceptCimke"
+                  "$ref": "#/components/schemas/ReceptCimkeDto"
                 }
               }
             }
@@ -437,17 +437,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceptCimke"
+                  "$ref": "#/components/schemas/ReceptCimkeDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceptCimke"
+                  "$ref": "#/components/schemas/ReceptCimkeDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceptCimke"
+                  "$ref": "#/components/schemas/ReceptCimkeDto"
                 }
               }
             }
@@ -486,17 +486,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Recept"
+                  "$ref": "#/components/schemas/ReceptResponseDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Recept"
+                  "$ref": "#/components/schemas/ReceptResponseDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Recept"
+                  "$ref": "#/components/schemas/ReceptResponseDto"
                 }
               }
             }
@@ -557,7 +557,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Recept"
+                    "$ref": "#/components/schemas/ReceptResponseDto"
                   }
                 }
               },
@@ -565,7 +565,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Recept"
+                    "$ref": "#/components/schemas/ReceptResponseDto"
                   }
                 }
               },
@@ -573,7 +573,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Recept"
+                    "$ref": "#/components/schemas/ReceptResponseDto"
                   }
                 }
               }
@@ -624,28 +624,6 @@
   },
   "components": {
     "schemas": {
-      "Cimke": {
-        "type": "object",
-        "properties": {
-          "cimkeId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "cimkeNev": {
-            "type": "string"
-          },
-          "receptCimkek": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReceptCimke"
-            }
-          }
-        }
-      },
       "CimkeDto": {
         "required": [
           "cimkeNev"
@@ -659,7 +637,6 @@
           }
         }
       },
-      "MentettRecept": { },
       "MentettReceptResponseDto": {
         "type": "object",
         "properties": {
@@ -681,106 +658,6 @@
           "mentveEkkor": {
             "type": "string",
             "format": "date-time"
-          }
-        }
-      },
-      "Recept": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "nev": {
-            "type": "string"
-          },
-          "leiras": {
-            "type": "string"
-          },
-          "hozzavalok": {
-            "type": "string"
-          },
-          "elkeszitesiIdo": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "nehezsegiSzint": {
-            "type": "string"
-          },
-          "likes": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "userId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "user": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/components/schemas/User"
-              }
-            ]
-          },
-          "receptCimkek": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReceptCimke"
-            }
-          },
-          "mentettReceptek": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MentettRecept"
-            }
-          }
-        }
-      },
-      "ReceptCimke": {
-        "type": "object",
-        "properties": {
-          "receptId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "recept": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/components/schemas/Recept"
-              }
-            ]
-          },
-          "cimkeId": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "cimke": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/components/schemas/Cimke"
-              }
-            ]
           }
         }
       },
@@ -947,49 +824,6 @@
           },
           "refreshToken": {
             "type": "string"
-          }
-        }
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "username": {
-            "type": "string"
-          },
-          "passwordHash": {
-            "type": "string"
-          },
-          "role": {
-            "type": "string"
-          },
-          "refreshToken": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "refreshTokenExpiryTime": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "format": "date-time"
-          },
-          "receptek": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Recept"
-            }
-          },
-          "mentettReceptek": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MentettRecept"
-            }
           }
         }
       },

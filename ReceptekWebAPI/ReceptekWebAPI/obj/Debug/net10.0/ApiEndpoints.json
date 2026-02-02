@@ -113,7 +113,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ReceptekWebAPI.Entities.Cimke",
+        "Type": "ReceptekWebAPI.Models.CimkeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -139,7 +139,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ReceptekWebAPI.Entities.Cimke",
+        "Type": "ReceptekWebAPI.Models.CimkeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -165,7 +165,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ReceptekWebAPI.Entities.Recept",
+        "Type": "ReceptekWebAPI.Models.ReceptResponseDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -211,7 +211,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[ReceptekWebAPI.Entities.Recept, ReceptekWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[ReceptekWebAPI.Models.ReceptResponseDto, ReceptekWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -237,7 +237,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ReceptekWebAPI.Entities.ReceptCimke",
+        "Type": "ReceptekWebAPI.Models.ReceptCimkeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -268,7 +268,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ReceptekWebAPI.Entities.ReceptCimke",
+        "Type": "ReceptekWebAPI.Models.ReceptCimkeDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
