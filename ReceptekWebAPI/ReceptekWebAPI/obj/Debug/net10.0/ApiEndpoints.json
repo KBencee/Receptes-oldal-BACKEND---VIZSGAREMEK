@@ -87,7 +87,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ReceptekWebAPI.Entities.User",
+        "Type": "ReceptekWebAPI.Models.UserResponseDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

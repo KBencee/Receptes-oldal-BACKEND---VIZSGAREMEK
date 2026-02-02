@@ -20,7 +20,7 @@ namespace ReceptekWebAPI.Controllers
         public static User user = new User();
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<UserResponseDto>> Register(UserDto request)
         {
             var user = await authService.RegisterAsync(request);
             if (user is null)

@@ -24,7 +24,7 @@ namespace ReceptekWebAPI.Controllers
             await _context.SaveChangesAsync();
 
             var response = new CimkeDto { CimkeNev = cimke.CimkeNev };
-            return CreatedAtAction(nameof(GetById), new { id = cimke.CimkeId }, cimke);
+            return CreatedAtAction(nameof(GetById), new { id = cimke.CimkeId }, response);
         }
 
         [HttpGet("{id:int}")]

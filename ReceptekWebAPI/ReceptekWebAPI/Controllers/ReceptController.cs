@@ -66,8 +66,7 @@ namespace ReceptekWebAPI.Controllers
             await _context.SaveChangesAsync();
 
             var r = await _context.Receptek
-                .Include(x => x.ReceptCimkek)
-                    .ThenInclude(rc => rc.Cimke)
+                .Include(x => x.ReceptCimkek).ThenInclude(rc => rc.Cimke)
                 .Include(x => x.User)
                 .FirstOrDefaultAsync(x => x.Id == recept.Id);
 
@@ -85,7 +84,7 @@ namespace ReceptekWebAPI.Controllers
                 MentveVan = false
             };
 
-            return CreatedAtAction(nameof(GetById), new { id = recept.Id }, recept);
+            return CreatedAtAction(nameof(GetById), new { id = recept.Id }, response);
         }
 
         [HttpGet("{id:guid}")]
@@ -146,7 +145,7 @@ namespace ReceptekWebAPI.Controllers
                 MentveVan = false
             }).ToList();
 
-            return Ok(recepts);
+            return Ok(responses);
         }
     }
 }

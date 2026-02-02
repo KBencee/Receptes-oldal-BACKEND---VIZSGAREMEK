@@ -38,7 +38,7 @@ namespace ReceptekWebAPI.Controllers
             await _context.SaveChangesAsync();
 
             var response = new ReceptCimkeDto { ReceptId = entity.ReceptId, CimkeId = entity.CimkeId };
-            return CreatedAtAction(nameof(GetByIds), new { receptId = entity.ReceptId, cimkeId = entity.CimkeId }, entity);
+            return CreatedAtAction(nameof(GetByIds), new { receptId = entity.ReceptId, cimkeId = entity.CimkeId }, response);
         }
 
         [HttpGet("{receptId:guid}/{cimkeId:int}")]
