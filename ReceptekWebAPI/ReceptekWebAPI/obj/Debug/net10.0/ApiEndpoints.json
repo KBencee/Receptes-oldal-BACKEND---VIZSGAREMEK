@@ -151,32 +151,6 @@
   },
   {
     "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
-    "Method": "Create",
-    "RelativePath": "api/Recept",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "ReceptekWebAPI.Models.ReceptDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ReceptekWebAPI.Models.ReceptResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
     "Method": "GetById",
     "RelativePath": "api/Recept/{id}",
     "HttpMethod": "GET",
@@ -204,7 +178,7 @@
   {
     "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
     "Method": "GetAll",
-    "RelativePath": "api/Recept/recept",
+    "RelativePath": "api/Recept/GetRecept",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -212,6 +186,32 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[ReceptekWebAPI.Models.ReceptResponseDto, ReceptekWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
+    "Method": "Create",
+    "RelativePath": "api/Recept/PostRecept",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ReceptekWebAPI.Models.ReceptDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReceptekWebAPI.Models.ReceptResponseDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

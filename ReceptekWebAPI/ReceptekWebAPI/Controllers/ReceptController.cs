@@ -15,7 +15,7 @@ namespace ReceptekWebAPI.Controllers
         private readonly UserDbContext _context;
         public ReceptController(UserDbContext context) => _context = context;
 
-        [HttpPost]
+        [HttpPost("PostRecept")]
         [Authorize]
         public async Task<ActionResult<ReceptResponseDto>> Create([FromBody] ReceptDto dto)
         {
@@ -80,6 +80,7 @@ namespace ReceptekWebAPI.Controllers
                 NehezsegiSzint = r.NehezsegiSzint,
                 Likes = r.Likes,
                 FeltoltoUsername = r.User?.Username ?? "Unknown",
+                FeltoltveEkkor = r.FeltoltveEkkor,
                 Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
                 MentveVan = false
             };
@@ -114,6 +115,7 @@ namespace ReceptekWebAPI.Controllers
                 NehezsegiSzint = r.NehezsegiSzint,
                 Likes = r.Likes,
                 FeltoltoUsername = (await _context.Users.FindAsync(r.UserId))?.Username ?? "Unknown",
+                FeltoltveEkkor = r.FeltoltveEkkor,
                 Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
                 MentveVan = mentveVan
             };
@@ -121,7 +123,7 @@ namespace ReceptekWebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("recept")]
+        [HttpGet("GetRecept")]
         [AllowAnonymous]
         public async Task<ActionResult<List<ReceptResponseDto>>> GetAll()
         {
@@ -141,6 +143,7 @@ namespace ReceptekWebAPI.Controllers
                 NehezsegiSzint = r.NehezsegiSzint,
                 Likes = r.Likes,
                 FeltoltoUsername = r.User?.Username ?? "Unknown",
+                FeltoltveEkkor = r.FeltoltveEkkor,
                 Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
                 MentveVan = false
             }).ToList();

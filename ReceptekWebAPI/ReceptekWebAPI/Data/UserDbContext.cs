@@ -19,8 +19,12 @@ namespace ReceptekWebAPI.Data
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Recept>()
+                .Property(r => r.FeltoltveEkkor)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
             modelBuilder.Entity<ReceptCimke>()
-        .HasKey(rc => new { rc.ReceptId, rc.CimkeId });
+                .HasKey(rc => new { rc.ReceptId, rc.CimkeId });
 
             modelBuilder.Entity<ReceptCimke>()
                 .HasOne(rc => rc.Recept)

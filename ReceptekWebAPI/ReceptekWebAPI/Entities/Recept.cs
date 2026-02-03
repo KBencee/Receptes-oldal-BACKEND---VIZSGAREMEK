@@ -13,6 +13,8 @@
         public Guid UserId { get; set; }
         public User? User { get; set; }
 
+        public DateTime FeltoltveEkkor { get; set; }
+
         public ICollection<ReceptCimke> ReceptCimkek { get; set; } = new List<ReceptCimke>();
         public ICollection<MentettRecept> MentettReceptek { get; set; } = new List<MentettRecept>();
     }

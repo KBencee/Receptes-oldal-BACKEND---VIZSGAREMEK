@@ -455,7 +455,7 @@
         }
       }
     },
-    "/api/Recept": {
+    "/api/Recept/PostRecept": {
       "post": {
         "tags": [
           "Recept"
@@ -544,7 +544,7 @@
         }
       }
     },
-    "/api/Recept/recept": {
+    "/api/Recept/GetRecept": {
       "get": {
         "tags": [
           "Recept"
@@ -785,6 +785,10 @@
           },
           "feltoltoUsername": {
             "type": "string"
+          },
+          "feltoltveEkkor": {
+            "type": "string",
+            "format": "date-time"
           },
           "cimkek": {
             "type": "array",

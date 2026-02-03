@@ -12,6 +12,8 @@
 
         public string FeltoltoUsername { get; set; } = string.Empty;
 
+        public DateTime FeltoltveEkkor { get; set; }
+
         public List<string> Cimkek { get; set; } = new List<string>();
         public bool MentveVan { get; set; }
     }
