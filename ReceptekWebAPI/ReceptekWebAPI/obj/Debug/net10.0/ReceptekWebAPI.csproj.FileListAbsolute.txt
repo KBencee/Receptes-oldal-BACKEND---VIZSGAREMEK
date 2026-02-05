@@ -378,3 +378,4 @@ C:\Users\kissb\OneDrive\Dokumentumok\Receptes-oldal-BACKEND---VIZSGAREMEK\Recept
 C:\Users\kissb\OneDrive\Dokumentumok\Receptes-oldal-BACKEND---VIZSGAREMEK\ReceptekWebAPI\ReceptekWebAPI\obj\Debug\net10.0\ReceptekWebAPI.pdb
 C:\Users\kissb\OneDrive\Dokumentumok\Receptes-oldal-BACKEND---VIZSGAREMEK\ReceptekWebAPI\ReceptekWebAPI\obj\Debug\net10.0\ReceptekWebAPI.genruntimeconfig.cache
 C:\Users\kissb\OneDrive\Dokumentumok\Receptes-oldal-BACKEND---VIZSGAREMEK\ReceptekWebAPI\ReceptekWebAPI\obj\Debug\net10.0\ref\ReceptekWebAPI.dll
+C:\Users\kissb\OneDrive\Dokumentumok\Receptes-oldal-BACKEND---VIZSGAREMEK\ReceptekWebAPI\ReceptekWebAPI\bin\Debug\net10.0\Imagekit.dll

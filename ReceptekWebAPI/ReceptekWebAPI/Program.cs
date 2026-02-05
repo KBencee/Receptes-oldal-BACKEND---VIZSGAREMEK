@@ -1,3 +1,4 @@
+using Imagekit.Sdk;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -49,6 +50,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true
         };
     });
+
+builder.Services.AddSingleton(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+
+    return new ImagekitClient(
+        config["ImageKit:PublicKey"],
+        config["ImageKit:PrivateKey"],
+        config["ImageKit:UrlEndpoint"]);
+    });
+
+builder.Services.AddScoped<ImageKitService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 

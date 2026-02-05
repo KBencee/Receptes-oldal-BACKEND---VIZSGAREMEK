@@ -17,5 +17,7 @@
 
         public ICollection<ReceptCimke> ReceptCimkek { get; set; } = new List<ReceptCimke>();
         public ICollection<MentettRecept> MentettReceptek { get; set; } = new List<MentettRecept>();
+
+        public FeltoltottKep? Kep { get; set; }
     }
 }

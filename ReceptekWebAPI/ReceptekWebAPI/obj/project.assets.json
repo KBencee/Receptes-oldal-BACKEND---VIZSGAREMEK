@@ -51,6 +51,23 @@
           }
         }
       },
+      "Imagekit/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
+          "Newtonsoft.Json": "12.0.2"
+        },
+        "compile": {
+          "lib/net7.0/Imagekit.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Imagekit.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/10.0.2": {
         "type": "package",
         "dependencies": {
@@ -891,7 +908,7 @@
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
@@ -1348,6 +1365,27 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Imagekit/5.0.0": {
+      "sha512": "Jwh8Ui13j/U9Y1eCicm88RM8Zo2tfRmwGicq7o11sM5B8RrMGWZEAfS94dPs0lD1TSaNplRw2uKZKkeVD42FsA==",
+      "type": "package",
+      "path": "imagekit/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "imagekit.5.0.0.nupkg.sha512",
+        "imagekit.nuspec",
+        "lib/net5.0/Imagekit.dll",
+        "lib/net5.0/Imagekit.xml",
+        "lib/net6.0/Imagekit.dll",
+        "lib/net6.0/Imagekit.xml",
+        "lib/net7.0/Imagekit.dll",
+        "lib/net7.0/Imagekit.xml",
+        "lib/netcoreapp3.1/Imagekit.dll",
+        "lib/netcoreapp3.1/Imagekit.xml",
+        "lib/netstandard2.0/Imagekit.dll",
+        "lib/netstandard2.0/Imagekit.xml"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/10.0.2": {
@@ -3561,6 +3599,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Imagekit >= 5.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 10.0.2",
       "Microsoft.AspNetCore.OpenApi >= 10.0.2",
       "Microsoft.EntityFrameworkCore >= 10.0.2",
@@ -3572,23 +3611,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kiss.bence\\.nuget\\packages\\": {},
+    "C:\\Users\\kissb\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kiss.bence\\Documents\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\ReceptekWebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\ReceptekWebAPI.csproj",
       "projectName": "ReceptekWebAPI",
-      "projectPath": "C:\\Users\\kiss.bence\\Documents\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\ReceptekWebAPI.csproj",
-      "packagesPath": "C:\\Users\\kiss.bence\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kiss.bence\\Documents\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\obj\\",
+      "projectPath": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\ReceptekWebAPI.csproj",
+      "packagesPath": "C:\\Users\\kissb\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\kiss.bence\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kissb\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3597,7 +3636,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3622,6 +3660,10 @@
       "net10.0": {
         "targetAlias": "net10.0",
         "dependencies": {
+          "Imagekit": {
+            "target": "Package",
+            "version": "[5.0.0, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[10.0.2, )"
