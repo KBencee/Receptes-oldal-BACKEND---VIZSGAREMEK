@@ -3,34 +3,42 @@ using ReceptekWebAPI.Models;
 
 namespace ReceptekWebAPI.Services
 {
-    public class ImageKitService
+    public class ImageKitService : IImageKitService
     {
-        private readonly ImagekitClient _imagekit;
+        private readonly ImagekitClient _client;
 
-        public ImageKitService(ImagekitClient imagekit)
+        public ImageKitService(ImagekitClient client)
         {
-            _imagekit = imagekit;
+            _client = client;
         }
 
-        public Result Upload(byte[] file, string fileName)
+        public async Task<(string Url, string FileId)> UploadAsync(IFormFile file)
         {
+            using var ms = new MemoryStream();
+            await file.CopyToAsync(ms);
+
             var request = new FileCreateRequest
             {
-                file = file,
-                fileName = fileName,
+                file = ms.ToArray(),
+                fileName = file.FileName,
                 folder = "/receptek",
                 useUniqueFileName = true
             };
 
-            return _imagekit.Upload(request);
+            var result = _client.Upload(request);
+
+            if (result == null)
+                throw new Exception("ImageKit upload failed");
+
+            return (result.url, result.fileId);
         }
 
-        public ResultDelete Delete(string fileId)
+        public async Task DeleteAsync(string fileId)
         {
-            if (string.IsNullOrWhiteSpace(fileId))
-                return null;
-
-            return _imagekit.DeleteFile(fileId);
+            if (!string.IsNullOrWhiteSpace(fileId))
+            {
+                _client.DeleteFile(fileId);
+            }
         }
     }
 }

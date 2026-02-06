@@ -151,15 +151,15 @@
   },
   {
     "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
-    "Method": "GetById",
-    "RelativePath": "api/Recept/{id}",
-    "HttpMethod": "GET",
+    "Method": "Create",
+    "RelativePath": "api/Recept",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Guid",
+        "Name": "dto",
+        "Type": "ReceptekWebAPI.Models.ReceptDto",
         "IsRequired": true
       }
     ],
@@ -178,7 +178,7 @@
   {
     "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
     "Method": "GetAll",
-    "RelativePath": "api/Recept/GetRecept",
+    "RelativePath": "api/Recept",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -197,15 +197,15 @@
   },
   {
     "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
-    "Method": "Create",
-    "RelativePath": "api/Recept/PostRecept",
-    "HttpMethod": "POST",
+    "Method": "GetById",
+    "RelativePath": "api/Recept/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "dto",
-        "Type": "ReceptekWebAPI.Models.ReceptDto",
+        "Name": "id",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],

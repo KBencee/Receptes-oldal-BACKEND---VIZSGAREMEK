@@ -2,7 +2,7 @@
 {
     public interface IImageKitService
     {
-        Task<(string fileId, string url)> UploadImageAsync(IFormFile file);
-        Task<bool> DeleteImageAsync(string fileId);
+        Task<(string Url, string FileId)> UploadAsync(IFormFile file);
+        Task DeleteAsync(string fileId);
     }
 }

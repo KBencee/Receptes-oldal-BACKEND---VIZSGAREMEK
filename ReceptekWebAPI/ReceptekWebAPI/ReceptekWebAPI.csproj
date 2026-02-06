@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\KepekController.cs" />
     <Compile Remove="Models\KepDto.cs" />
     <Compile Remove="Models\UploadPictureDto.cs" />
   </ItemGroup>
