@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ReceptekWebAPI.Data;
 using ReceptekWebAPI.Entities;
 using ReceptekWebAPI.Models;
@@ -35,6 +36,15 @@ namespace ReceptekWebAPI.Controllers
             if (c is null) return NotFound();
             var dto = new CimkeDto { CimkeNev = c.CimkeNev };
             return Ok(dto);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<CimkeDto>>> GetAll()
+        {
+            var cimkek = await _context.Cimkek.ToListAsync();
+            var dtos = cimkek.Select(c => new CimkeDto { CimkeNev = c.CimkeNev }).ToList();
+            return Ok(dtos);
         }
     }
 }
