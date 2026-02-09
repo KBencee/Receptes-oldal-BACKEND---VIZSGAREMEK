@@ -14,10 +14,10 @@
         public User? User { get; set; }
 
         public DateTime FeltoltveEkkor { get; set; }
+        public string? KepUrl { get; set; }
+        public string? KepFileId { get; set; }
 
         public ICollection<ReceptCimke> ReceptCimkek { get; set; } = new List<ReceptCimke>();
         public ICollection<MentettRecept> MentettReceptek { get; set; } = new List<MentettRecept>();
-
-        public FeltoltottKep? Kep { get; set; }
     }
 }

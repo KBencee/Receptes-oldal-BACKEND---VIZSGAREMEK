@@ -1,5 +1,4 @@
 ﻿using Imagekit.Sdk;
-using ReceptekWebAPI.Models;
 
 namespace ReceptekWebAPI.Services
 {
@@ -20,15 +19,15 @@ namespace ReceptekWebAPI.Services
             var request = new FileCreateRequest
             {
                 file = ms.ToArray(),
-                fileName = file.FileName,
+                fileName = $"{Guid.NewGuid()}_{file.FileName}",
                 folder = "/receptek",
                 useUniqueFileName = true
             };
 
-            var result = _client.Upload(request);
+            var result = await Task.Run(() => _client.Upload(request));
 
-            if (result == null)
-                throw new Exception("ImageKit upload failed");
+            if (result == null || string.IsNullOrEmpty(result.url))
+                throw new Exception("ImageKit feltöltés sikertelen");
 
             return (result.url, result.fileId);
         }
@@ -37,7 +36,7 @@ namespace ReceptekWebAPI.Services
         {
             if (!string.IsNullOrWhiteSpace(fileId))
             {
-                _client.DeleteFile(fileId);
+                await Task.Run(() => _client.DeleteFile(fileId));
             }
         }
     }

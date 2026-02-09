@@ -61,7 +61,7 @@ builder.Services.AddSingleton(sp =>
         config["ImageKit:UrlEndpoint"]);
     });
 
-builder.Services.AddScoped<ImageKitService>();
+builder.Services.AddScoped<IImageKitService, ImageKitService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 

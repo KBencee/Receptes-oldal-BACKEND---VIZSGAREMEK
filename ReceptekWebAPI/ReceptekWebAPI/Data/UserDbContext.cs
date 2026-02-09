@@ -11,7 +11,6 @@ namespace ReceptekWebAPI.Data
         public DbSet<Cimke> Cimkek { get; set; } = null!;
         public DbSet<ReceptCimke> ReceptCimkek { get; set; } = null!;
         public DbSet<MentettRecept> MentettReceptek { get; set; } = null!;
-        public DbSet<FeltoltottKep> FeltoltottKepek { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,12 +18,6 @@ namespace ReceptekWebAPI.Data
                 .HasMany(u => u.Receptek)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Recept>()
-                .HasOne(r => r.Kep)
-                .WithOne(k => k.Recept)
-                .HasForeignKey<FeltoltottKep>(k => k.ReceptId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Recept>()

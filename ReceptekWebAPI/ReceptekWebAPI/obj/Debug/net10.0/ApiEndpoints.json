@@ -125,6 +125,26 @@
   },
   {
     "ContainingType": "ReceptekWebAPI.Controllers.CimkekController",
+    "Method": "GetAll",
+    "RelativePath": "api/Cimkek",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[ReceptekWebAPI.Models.CimkeDto, ReceptekWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReceptekWebAPI.Controllers.CimkekController",
     "Method": "GetById",
     "RelativePath": "api/Cimkek/{id}",
     "HttpMethod": "GET",
@@ -207,6 +227,134 @@
         "Name": "id",
         "Type": "System.Guid",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReceptekWebAPI.Models.ReceptResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
+    "Method": "AddImage",
+    "RelativePath": "api/Recept/{id}/add-image",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReceptekWebAPI.Models.ReceptResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
+    "Method": "DeleteImage",
+    "RelativePath": "api/Recept/{id}/delete-image",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekWebAPI.Controllers.ReceptController",
+    "Method": "CreateWithImage",
+    "RelativePath": "api/Recept/with-image",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Nev",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Leiras",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Hozzavalok",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ElkeszitesiIdo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "NehezsegiSzint",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CimkeIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Kep",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
