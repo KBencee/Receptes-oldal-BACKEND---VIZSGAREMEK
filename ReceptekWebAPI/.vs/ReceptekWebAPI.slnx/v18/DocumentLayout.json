@@ -39,24 +39,12 @@
       "RelativeMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|solutionrelative:receptekwebapi\\models\\receptdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|c:\\users\\kissb\\onedrive\\dokumentumok\\receptes-oldal-backend---vizsgaremek\\receptekwebapi\\receptekwebapi\\models\\kepresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|solutionrelative:receptekwebapi\\models\\kepresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|c:\\users\\kissb\\onedrive\\dokumentumok\\receptes-oldal-backend---vizsgaremek\\receptekwebapi\\receptekwebapi\\services\\iimagekitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|solutionrelative:receptekwebapi\\services\\iimagekitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|c:\\users\\kissb\\onedrive\\dokumentumok\\receptes-oldal-backend---vizsgaremek\\receptekwebapi\\receptekwebapi\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|solutionrelative:receptekwebapi\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|c:\\users\\kissb\\onedrive\\dokumentumok\\receptes-oldal-backend---vizsgaremek\\receptekwebapi\\receptekwebapi\\controllers\\mentettreceptekcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|solutionrelative:receptekwebapi\\controllers\\mentettreceptekcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|c:\\users\\kissb\\onedrive\\dokumentumok\\receptes-oldal-backend---vizsgaremek\\receptekwebapi\\receptekwebapi\\models\\uploadkepdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|solutionrelative:receptekwebapi\\models\\uploadkepdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|c:\\users\\kissb\\onedrive\\dokumentumok\\receptes-oldal-backend---vizsgaremek\\receptekwebapi\\receptekwebapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -73,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|c:\\users\\kissb\\onedrive\\dokumentumok\\receptes-oldal-backend---vizsgaremek\\receptekwebapi\\receptekwebapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|solutionrelative:receptekwebapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|c:\\users\\kissb\\onedrive\\dokumentumok\\receptes-oldal-backend---vizsgaremek\\receptekwebapi\\receptekwebapi\\controllers\\receptcimkecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|solutionrelative:receptekwebapi\\controllers\\receptcimkecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D29A6BBD-FF0C-D8B9-88D2-3E0A274D6E09}|ReceptekWebAPI\\ReceptekWebAPI.csproj|c:\\users\\kissb\\onedrive\\dokumentumok\\receptes-oldal-backend---vizsgaremek\\receptekwebapi\\receptekwebapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -110,45 +94,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ReceptResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\ReceptResponseDto.cs",
-              "RelativeDocumentMoniker": "ReceptekWebAPI\\Models\\ReceptResponseDto.cs",
-              "ToolTip": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\ReceptResponseDto.cs",
-              "RelativeToolTip": "ReceptekWebAPI\\Models\\ReceptResponseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T09:07:55.304Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "KepResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\KepResponseDto.cs",
-              "RelativeDocumentMoniker": "ReceptekWebAPI\\Models\\KepResponseDto.cs",
-              "ToolTip": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\KepResponseDto.cs",
-              "RelativeToolTip": "ReceptekWebAPI\\Models\\KepResponseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T12:22:48.429Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CimkekController.cs",
-              "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\CimkekController.cs",
-              "RelativeDocumentMoniker": "ReceptekWebAPI\\Controllers\\CimkekController.cs",
-              "ToolTip": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\CimkekController.cs",
-              "RelativeToolTip": "ReceptekWebAPI\\Controllers\\CimkekController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAC8AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T08:16:00.146Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -157,7 +104,7 @@
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Controllers\\ReceptController.cs",
               "ToolTip": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\ReceptController.cs",
               "RelativeToolTip": "ReceptekWebAPI\\Controllers\\ReceptController.cs",
-              "ViewState": "AgIAAAMBAAAAAAAAAAAswGQBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAACMBAAAAAAAAAAAswH0CAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-27T08:48:31.395Z",
               "EditorCaption": ""
@@ -200,7 +147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "IImageKitService.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Services\\IImageKitService.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Services\\IImageKitService.cs",
@@ -220,8 +167,31 @@
               "RelativeToolTip": "ReceptekWebAPI\\Models\\ReceptWithImageDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T19:17:48.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-05T19:17:48.531Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CimkekController.cs",
+              "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\CimkekController.cs",
+              "RelativeDocumentMoniker": "ReceptekWebAPI\\Controllers\\CimkekController.cs",
+              "ToolTip": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\CimkekController.cs",
+              "RelativeToolTip": "ReceptekWebAPI\\Controllers\\CimkekController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAC8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T08:16:00.146Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ReceptResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\ReceptResponseDto.cs",
+              "RelativeDocumentMoniker": "ReceptekWebAPI\\Models\\ReceptResponseDto.cs",
+              "ToolTip": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\ReceptResponseDto.cs",
+              "RelativeToolTip": "ReceptekWebAPI\\Models\\ReceptResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T09:07:55.304Z"
             },
             {
               "$type": "Document",
@@ -249,7 +219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Entities\\User.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Entities\\User.cs",
@@ -261,31 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "MentettReceptekController.cs",
-              "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\MentettReceptekController.cs",
-              "RelativeDocumentMoniker": "ReceptekWebAPI\\Controllers\\MentettReceptekController.cs",
-              "ToolTip": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\MentettReceptekController.cs",
-              "RelativeToolTip": "ReceptekWebAPI\\Controllers\\MentettReceptekController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T09:26:06.153Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "UploadKepDto.cs",
-              "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\UploadKepDto.cs",
-              "RelativeDocumentMoniker": "ReceptekWebAPI\\Models\\UploadKepDto.cs",
-              "ToolTip": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\UploadKepDto.cs",
-              "RelativeToolTip": "ReceptekWebAPI\\Models\\UploadKepDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T12:37:50.063Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 11,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\appsettings.json",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\appsettings.json",
@@ -297,7 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 13,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\UserDto.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Models\\UserDto.cs",
@@ -309,7 +255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 12,
               "Title": "MentettReceptResponseDto.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\MentettReceptResponseDto.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Models\\MentettReceptResponseDto.cs",
@@ -321,7 +267,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 14,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Services\\AuthService.cs",
@@ -333,7 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 15,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Controllers\\AuthController.cs",
@@ -346,18 +292,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 18,
-              "Title": "ReceptCimkeController.cs",
-              "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\ReceptCimkeController.cs",
-              "RelativeDocumentMoniker": "ReceptekWebAPI\\Controllers\\ReceptCimkeController.cs",
-              "ToolTip": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Controllers\\ReceptCimkeController.cs",
-              "RelativeToolTip": "ReceptekWebAPI\\Controllers\\ReceptCimkeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T08:12:56.091Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
               "Title": "CimkeDto.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\CimkeDto.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Models\\CimkeDto.cs",
@@ -369,7 +303,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 16,
               "Title": "UserResponseDto.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Models\\UserResponseDto.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Models\\UserResponseDto.cs",
@@ -381,7 +315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 17,
               "Title": "Cimke.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Entities\\Cimke.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Entities\\Cimke.cs",
@@ -393,7 +327,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 19,
               "Title": "MentettRecept.cs",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Entities\\MentettRecept.cs",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Entities\\MentettRecept.cs",
@@ -405,7 +339,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 20,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\kissb\\OneDrive\\Dokumentumok\\Receptes-oldal-BACKEND---VIZSGAREMEK\\ReceptekWebAPI\\ReceptekWebAPI\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "ReceptekWebAPI\\Properties\\launchSettings.json",

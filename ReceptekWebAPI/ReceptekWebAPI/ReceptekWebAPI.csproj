@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\KepekController.cs" />
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
     <Compile Remove="Models\KepDto.cs" />
     <Compile Remove="Models\UploadPictureDto.cs" />
+    <Compile Remove="WeatherForecast.cs" />
   </ItemGroup>
 
   <ItemGroup>

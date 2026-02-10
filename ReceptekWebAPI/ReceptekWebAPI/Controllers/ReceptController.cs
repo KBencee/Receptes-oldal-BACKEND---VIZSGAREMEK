@@ -33,7 +33,6 @@ namespace ReceptekWebAPI.Controllers
             if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
                 return Unauthorized();
 
-            // 1. Recept létrehozása
             var recept = new Recept
             {
                 Id = Guid.NewGuid(),
@@ -47,7 +46,6 @@ namespace ReceptekWebAPI.Controllers
                 FeltoltveEkkor = DateTime.UtcNow
             };
 
-            // 2. Kép feltöltése (ha van)
             if (dto.Kep != null && dto.Kep.Length > 0)
             {
                 try
@@ -64,7 +62,6 @@ namespace ReceptekWebAPI.Controllers
 
             _context.Receptek.Add(recept);
 
-            // 3. Címkék hozzáadása
             if (dto.CimkeIds != null && dto.CimkeIds.Any())
             {
                 var uniqueIds = dto.CimkeIds.Distinct().ToList();
@@ -91,7 +88,6 @@ namespace ReceptekWebAPI.Controllers
 
             await _context.SaveChangesAsync();
 
-            // 4. Válasz visszaküldése
             var r = await _context.Receptek
                 .Include(x => x.ReceptCimkek).ThenInclude(rc => rc.Cimke)
                 .Include(x => x.User)
@@ -259,6 +255,103 @@ namespace ReceptekWebAPI.Controllers
             return Ok(responses);
         }
 
+        [HttpGet("my-recipes")]
+        [Authorize]
+        public async Task<ActionResult<List<ReceptResponseDto>>> GetMyRecipes()
+        {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+                return Unauthorized();
+
+            var receptek = await _context.Receptek
+                .Where(r => r.UserId == userId)
+                .Include(r => r.ReceptCimkek).ThenInclude(rc => rc.Cimke)
+                .Include(r => r.User)
+                .OrderByDescending(r => r.FeltoltveEkkor)
+                .ToListAsync();
+
+            var responses = receptek.Select(r => new ReceptResponseDto
+            {
+                Id = r.Id,
+                Nev = r.Nev,
+                Leiras = r.Leiras,
+                Hozzavalok = r.Hozzavalok,
+                ElkeszitesiIdo = r.ElkeszitesiIdo,
+                NehezsegiSzint = r.NehezsegiSzint,
+                Likes = r.Likes,
+                FeltoltoUsername = r.User?.Username ?? "Unknown",
+                FeltoltveEkkor = r.FeltoltveEkkor,
+                KepUrl = r.KepUrl,
+                Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                MentveVan = false
+            }).ToList();
+
+            return Ok(responses);
+        }
+
+        [HttpGet("by-tag/{cimkeId:int}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<ReceptResponseDto>>> GetByTag(int cimkeId)
+        {
+            var receptek = await _context.Receptek
+                .Include(r => r.ReceptCimkek).ThenInclude(rc => rc.Cimke)
+                .Include(r => r.User)
+                .Where(r => r.ReceptCimkek.Any(rc => rc.CimkeId == cimkeId))
+                .ToListAsync();
+
+            var responses = receptek.Select(r => new ReceptResponseDto
+            {
+                Id = r.Id,
+                Nev = r.Nev,
+                Leiras = r.Leiras,
+                Hozzavalok = r.Hozzavalok,
+                ElkeszitesiIdo = r.ElkeszitesiIdo,
+                NehezsegiSzint = r.NehezsegiSzint,
+                Likes = r.Likes,
+                FeltoltoUsername = r.User?.Username ?? "Unknown",
+                FeltoltveEkkor = r.FeltoltveEkkor,
+                KepUrl = r.KepUrl,
+                Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                MentveVan = false
+            }).ToList();
+
+            return Ok(responses);
+        }
+
+        [HttpGet("search")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<ReceptResponseDto>>> Search([FromQuery] string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return BadRequest("Keresési kifejezés kötelező");
+
+            var receptek = await _context.Receptek
+                .Include(r => r.ReceptCimkek).ThenInclude(rc => rc.Cimke)
+                .Include(r => r.User)
+                .Where(r => r.Nev.Contains(query) ||
+                            r.Leiras.Contains(query) ||
+                            r.Hozzavalok.Contains(query))
+                .ToListAsync();
+
+            var responses = receptek.Select(r => new ReceptResponseDto
+            {
+                Id = r.Id,
+                Nev = r.Nev,
+                Leiras = r.Leiras,
+                Hozzavalok = r.Hozzavalok,
+                ElkeszitesiIdo = r.ElkeszitesiIdo,
+                NehezsegiSzint = r.NehezsegiSzint,
+                Likes = r.Likes,
+                FeltoltoUsername = r.User?.Username ?? "Unknown",
+                FeltoltveEkkor = r.FeltoltveEkkor,
+                KepUrl = r.KepUrl,
+                Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                MentveVan = false
+            }).ToList();
+
+            return Ok(responses);
+        }
+
         [HttpPost("{id:guid}/add-image")]
         [Authorize]
         public async Task<ActionResult<ReceptResponseDto>> AddImage(Guid id, [FromForm] IFormFile kep)
@@ -317,6 +410,66 @@ namespace ReceptekWebAPI.Controllers
             }
         }
 
+        [HttpPut("{id:guid}/update-image")]
+        [Authorize]
+        public async Task<ActionResult<ReceptResponseDto>> UpdateImage(Guid id, [FromForm] IFormFile kep)
+        {
+            if (kep == null || kep.Length == 0)
+                return BadRequest("Kép fájl kötelező");
+
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+                return Unauthorized();
+
+            var recept = await _context.Receptek.FirstOrDefaultAsync(r => r.Id == id);
+
+            if (recept == null)
+                return NotFound("Recept nem található");
+
+            if (recept.UserId != userId)
+                return Forbid("Csak a saját recepted képét módosíthatod");
+
+            try
+            {
+                if (!string.IsNullOrEmpty(recept.KepFileId))
+                {
+                    await _imageKitService.DeleteAsync(recept.KepFileId);
+                }
+
+                var (url, fileId) = await _imageKitService.UploadAsync(kep);
+                recept.KepUrl = url;
+                recept.KepFileId = fileId;
+                await _context.SaveChangesAsync();
+
+                var r = await _context.Receptek
+                    .Include(x => x.ReceptCimkek).ThenInclude(rc => rc.Cimke)
+                    .Include(x => x.User)
+                    .FirstOrDefaultAsync(x => x.Id == id);
+
+                var response = new ReceptResponseDto
+                {
+                    Id = r!.Id,
+                    Nev = r.Nev,
+                    Leiras = r.Leiras,
+                    Hozzavalok = r.Hozzavalok,
+                    ElkeszitesiIdo = r.ElkeszitesiIdo,
+                    NehezsegiSzint = r.NehezsegiSzint,
+                    Likes = r.Likes,
+                    FeltoltoUsername = r.User?.Username ?? "Unknown",
+                    FeltoltveEkkor = r.FeltoltveEkkor,
+                    KepUrl = r.KepUrl,
+                    Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                    MentveVan = false
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = "Kép frissítési hiba", details = ex.Message });
+            }
+        }
+
         [HttpDelete("{id:guid}/delete-image")]
         [Authorize]
         public async Task<ActionResult> DeleteImage(Guid id)
@@ -338,7 +491,6 @@ namespace ReceptekWebAPI.Controllers
 
             try
             {
-                // Törlés ImageKit-ről
                 if (!string.IsNullOrEmpty(recept.KepFileId))
                 {
                     await _imageKitService.DeleteAsync(recept.KepFileId);
@@ -354,6 +506,135 @@ namespace ReceptekWebAPI.Controllers
             {
                 return BadRequest(new { error = "Kép törlési hiba", details = ex.Message });
             }
+        }
+
+        [HttpDelete("{id:guid}")]
+        [Authorize]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+                return Unauthorized();
+
+            var recept = await _context.Receptek.FindAsync(id);
+            if (recept == null)
+                return NotFound("Recept nem található");
+
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (recept.UserId != userId && userRole != "Admin")
+            {
+                return Forbid("Ha nem vagy admin, csak a saját recepted törölheted");
+            }
+
+            if (!string.IsNullOrEmpty(recept.KepFileId))
+            {
+                await _imageKitService.DeleteAsync(recept.KepFileId);
+            }
+
+            _context.Receptek.Remove(recept);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Recept sikeresen törölve" });
+        }
+
+        [HttpPut("{id:guid}")]
+        [Authorize]
+        public async Task<ActionResult<ReceptResponseDto>> Update(Guid id, [FromBody] ReceptDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+                return Unauthorized();
+
+            var recept = await _context.Receptek.FindAsync(id);
+            if (recept == null)
+                return NotFound("Recept nem található");
+
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (recept.UserId != userId && userRole != "Admin")
+            {
+                return Forbid("Ha nem vagy admin, csak a saját recepted szerkesztheted");
+            }
+
+            recept.Nev = dto.Nev;
+            recept.Leiras = dto.Leiras ?? string.Empty;
+            recept.Hozzavalok = dto.Hozzavalok ?? string.Empty;
+            recept.ElkeszitesiIdo = dto.ElkeszitesiIdo;
+            recept.NehezsegiSzint = dto.NehezsegiSzint ?? string.Empty;
+
+            var meglevoReceptCimkek = await _context.ReceptCimkek
+                .Where(rc => rc.ReceptId == id)
+                .ToListAsync();
+            _context.ReceptCimkek.RemoveRange(meglevoReceptCimkek);
+
+            if (dto.CimkeIds != null && dto.CimkeIds.Any())
+            {
+                foreach (var cimkeId in dto.CimkeIds.Distinct())
+                {
+                    _context.ReceptCimkek.Add(new ReceptCimke
+                    {
+                        ReceptId = recept.Id,
+                        CimkeId = cimkeId
+                    });
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            var r = await _context.Receptek
+                .Include(x => x.ReceptCimkek).ThenInclude(rc => rc.Cimke)
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            var response = new ReceptResponseDto
+            {
+                Id = r!.Id,
+                Nev = r.Nev,
+                Leiras = r.Leiras,
+                Hozzavalok = r.Hozzavalok,
+                ElkeszitesiIdo = r.ElkeszitesiIdo,
+                NehezsegiSzint = r.NehezsegiSzint,
+                Likes = r.Likes,
+                FeltoltoUsername = r.User?.Username ?? "Unknown",
+                FeltoltveEkkor = r.FeltoltveEkkor,
+                KepUrl = r.KepUrl,
+                Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                MentveVan = false
+            };
+
+            return Ok(response);
+        }
+
+        [HttpPost("{id:guid}/like")]
+        [Authorize]
+        public async Task<ActionResult> LikeRecept(Guid id)
+        {
+            var recept = await _context.Receptek.FindAsync(id);
+            if (recept == null)
+                return NotFound("Recept nem található");
+
+            recept.Likes++;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { likes = recept.Likes });
+        }
+
+        [HttpPost("{id:guid}/unlike")]
+        [Authorize]
+        public async Task<ActionResult> UnlikeRecept(Guid id)
+        {
+            var recept = await _context.Receptek.FindAsync(id);
+            if (recept == null)
+                return NotFound("Recept nem található");
+
+            if (recept.Likes > 0)
+                recept.Likes--;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new { likes = recept.Likes });
         }
     }
 }
