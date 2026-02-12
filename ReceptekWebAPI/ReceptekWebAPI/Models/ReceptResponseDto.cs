@@ -17,5 +17,6 @@
 
         public List<string> Cimkek { get; set; } = new List<string>();
         public bool MentveVan { get; set; }
+        public bool LikeolvaVan { get; set; }
     }
 }

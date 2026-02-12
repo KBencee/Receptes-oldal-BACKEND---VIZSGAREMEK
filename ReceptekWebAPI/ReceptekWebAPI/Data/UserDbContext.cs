@@ -11,6 +11,9 @@ namespace ReceptekWebAPI.Data
         public DbSet<Cimke> Cimkek { get; set; } = null!;
         public DbSet<ReceptCimke> ReceptCimkek { get; set; } = null!;
         public DbSet<MentettRecept> MentettReceptek { get; set; } = null!;
+        public DbSet<Like> Likes { get; set; } = null!;
+
+        public DbSet<ReceptKomment> ReceptKommentek { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +22,37 @@ namespace ReceptekWebAPI.Data
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Like>()
+                .HasKey(l => new { l.UserId, l.ReceptId });
+
+            modelBuilder.Entity<Like>()
+                .HasOne(l => l.User)
+                .WithMany()
+                .HasForeignKey(l => l.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Like>()
+                .HasOne(l => l.Recept)
+                .WithMany()
+                .HasForeignKey(l => l.ReceptId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ReceptKomment>()
+                .HasOne(rk => rk.User)
+                .WithMany()
+                .HasForeignKey(rk => rk.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ReceptKomment>()
+                .HasOne(rk => rk.Recept)
+                .WithMany(r => r.Kommentek)
+                .HasForeignKey(rk => rk.ReceptId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ReceptKomment>()
+                .Property(rk => rk.IrtaEkkor)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder.Entity<Recept>()
                 .Property(r => r.FeltoltveEkkor)

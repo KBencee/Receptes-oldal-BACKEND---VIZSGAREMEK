@@ -19,5 +19,7 @@
 
         public ICollection<ReceptCimke> ReceptCimkek { get; set; } = new List<ReceptCimke>();
         public ICollection<MentettRecept> MentettReceptek { get; set; } = new List<MentettRecept>();
+
+        public ICollection<ReceptKomment> Kommentek { get; set; } = new List<ReceptKomment>();
     }
 }

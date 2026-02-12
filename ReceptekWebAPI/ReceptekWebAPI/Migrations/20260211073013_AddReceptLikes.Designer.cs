@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReceptekWebAPI.Data;
 
@@ -10,9 +11,11 @@ using ReceptekWebAPI.Data;
 namespace ReceptekWebAPI.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260211073013_AddReceptLikes")]
+    partial class AddReceptLikes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.2");
@@ -132,36 +135,6 @@ namespace ReceptekWebAPI.Migrations
                     b.ToTable("ReceptCimkek");
                 });
 
-            modelBuilder.Entity("ReceptekWebAPI.Entities.ReceptKomment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("IrtaEkkor")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<Guid>("ReceptId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Szoveg")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReceptId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ReceptKommentek");
-                });
-
             modelBuilder.Entity("ReceptekWebAPI.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -259,25 +232,6 @@ namespace ReceptekWebAPI.Migrations
                     b.Navigation("Recept");
                 });
 
-            modelBuilder.Entity("ReceptekWebAPI.Entities.ReceptKomment", b =>
-                {
-                    b.HasOne("ReceptekWebAPI.Entities.Recept", "Recept")
-                        .WithMany("Kommentek")
-                        .HasForeignKey("ReceptId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ReceptekWebAPI.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Recept");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ReceptekWebAPI.Entities.Cimke", b =>
                 {
                     b.Navigation("ReceptCimkek");
@@ -285,8 +239,6 @@ namespace ReceptekWebAPI.Migrations
 
             modelBuilder.Entity("ReceptekWebAPI.Entities.Recept", b =>
                 {
-                    b.Navigation("Kommentek");
-
                     b.Navigation("MentettReceptek");
 
                     b.Navigation("ReceptCimkek");

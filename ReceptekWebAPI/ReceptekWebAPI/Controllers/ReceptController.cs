@@ -106,7 +106,8 @@ namespace ReceptekWebAPI.Controllers
                 FeltoltveEkkor = r.FeltoltveEkkor,
                 KepUrl = r.KepUrl,
                 Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
-                MentveVan = false
+                MentveVan = false,
+                LikeolvaVan = false
             };
 
             return CreatedAtAction(nameof(GetById), new { id = recept.Id }, response);
@@ -182,7 +183,8 @@ namespace ReceptekWebAPI.Controllers
                 FeltoltveEkkor = r.FeltoltveEkkor,
                 KepUrl = r.KepUrl,
                 Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
-                MentveVan = false
+                MentveVan = false,
+                LikeolvaVan = false
             };
 
             return CreatedAtAction(nameof(GetById), new { id = recept.Id }, response);
@@ -204,8 +206,21 @@ namespace ReceptekWebAPI.Controllers
             if (r is null)
                 return NotFound("Recept nem található");
 
-            var mentveVan = userId != null && await _context.MentettReceptek
-                .AnyAsync(mr => mr.ReceptId == r.Id && mr.UserId == userId);
+            List<Guid> mentettReceptIds = new();
+            List<Guid> likeoltReceptIds = new();
+
+            if (userId.HasValue)
+            {
+                mentettReceptIds = await _context.MentettReceptek
+                    .Where(mr => mr.UserId == userId.Value)
+                    .Select(mr => mr.ReceptId)
+                    .ToListAsync();
+
+                likeoltReceptIds = await _context.Likes
+                    .Where(rl => rl.UserId == userId.Value)
+                    .Select(rl => rl.ReceptId)
+                    .ToListAsync();
+            }
 
             var response = new ReceptResponseDto
             {
@@ -220,7 +235,8 @@ namespace ReceptekWebAPI.Controllers
                 FeltoltveEkkor = r.FeltoltveEkkor,
                 KepUrl = r.KepUrl,
                 Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
-                MentveVan = mentveVan
+                MentveVan = mentettReceptIds.Contains(r.Id),
+                LikeolvaVan = likeoltReceptIds.Contains(r.Id)
             };
 
             return Ok(response);
@@ -230,11 +246,30 @@ namespace ReceptekWebAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<List<ReceptResponseDto>>> GetAll()
         {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Guid? userId = Guid.TryParse(userIdStr, out var u) ? u : null;
+
             var recepts = await _context.Receptek
                 .Include(r => r.ReceptCimkek)
                     .ThenInclude(rc => rc.Cimke)
                 .Include(r => r.User)
                 .ToListAsync();
+
+            List<Guid> mentettReceptIds = new();
+            List<Guid> likeoltReceptIds = new();
+
+            if (userId.HasValue)
+            {
+                mentettReceptIds = await _context.MentettReceptek
+                    .Where(mr => mr.UserId == userId.Value)
+                    .Select(mr => mr.ReceptId)
+                    .ToListAsync();
+
+                likeoltReceptIds = await _context.Likes
+                    .Where(rl => rl.UserId == userId.Value)
+                    .Select(rl => rl.ReceptId)
+                    .ToListAsync();
+            }
 
             var responses = recepts.Select(r => new ReceptResponseDto
             {
@@ -249,7 +284,8 @@ namespace ReceptekWebAPI.Controllers
                 FeltoltveEkkor = r.FeltoltveEkkor,
                 KepUrl = r.KepUrl,
                 Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
-                MentveVan = false
+                MentveVan = mentettReceptIds.Contains(r.Id),
+                LikeolvaVan = likeoltReceptIds.Contains(r.Id)
             }).ToList();
 
             return Ok(responses);
@@ -270,33 +306,14 @@ namespace ReceptekWebAPI.Controllers
                 .OrderByDescending(r => r.FeltoltveEkkor)
                 .ToListAsync();
 
-            var responses = receptek.Select(r => new ReceptResponseDto
-            {
-                Id = r.Id,
-                Nev = r.Nev,
-                Leiras = r.Leiras,
-                Hozzavalok = r.Hozzavalok,
-                ElkeszitesiIdo = r.ElkeszitesiIdo,
-                NehezsegiSzint = r.NehezsegiSzint,
-                Likes = r.Likes,
-                FeltoltoUsername = r.User?.Username ?? "Unknown",
-                FeltoltveEkkor = r.FeltoltveEkkor,
-                KepUrl = r.KepUrl,
-                Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
-                MentveVan = false
-            }).ToList();
+            var mentettReceptIds = await _context.MentettReceptek
+                .Where(mr => mr.UserId == userId)
+                .Select(mr => mr.ReceptId)
+                .ToListAsync();
 
-            return Ok(responses);
-        }
-
-        [HttpGet("by-tag/{cimkeId:int}")]
-        [AllowAnonymous]
-        public async Task<ActionResult<List<ReceptResponseDto>>> GetByTag(int cimkeId)
-        {
-            var receptek = await _context.Receptek
-                .Include(r => r.ReceptCimkek).ThenInclude(rc => rc.Cimke)
-                .Include(r => r.User)
-                .Where(r => r.ReceptCimkek.Any(rc => rc.CimkeId == cimkeId))
+            var likeoltReceptIds = await _context.Likes
+                .Where(rl => rl.UserId == userId)
+                .Select(rl => rl.ReceptId)
                 .ToListAsync();
 
             var responses = receptek.Select(r => new ReceptResponseDto
@@ -312,7 +329,57 @@ namespace ReceptekWebAPI.Controllers
                 FeltoltveEkkor = r.FeltoltveEkkor,
                 KepUrl = r.KepUrl,
                 Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
-                MentveVan = false
+                MentveVan = mentettReceptIds.Contains(r.Id),
+                LikeolvaVan = likeoltReceptIds.Contains(r.Id)
+            }).ToList();
+
+            return Ok(responses);
+        }
+
+        [HttpGet("by-tag/{cimkeId:int}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<ReceptResponseDto>>> GetByTag(int cimkeId)
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Guid? userId = Guid.TryParse(userIdStr, out var u) ? u : null;
+
+            var receptek = await _context.Receptek
+                .Include(r => r.ReceptCimkek).ThenInclude(rc => rc.Cimke)
+                .Include(r => r.User)
+                .Where(r => r.ReceptCimkek.Any(rc => rc.CimkeId == cimkeId))
+                .ToListAsync();
+
+            List<Guid> mentettReceptIds = new();
+            List<Guid> likeoltReceptIds = new();
+
+            if (userId.HasValue)
+            {
+                mentettReceptIds = await _context.MentettReceptek
+                    .Where(mr => mr.UserId == userId.Value)
+                    .Select(mr => mr.ReceptId)
+                    .ToListAsync();
+
+                likeoltReceptIds = await _context.Likes
+                    .Where(rl => rl.UserId == userId.Value)
+                    .Select(rl => rl.ReceptId)
+                    .ToListAsync();
+            }
+
+            var responses = receptek.Select(r => new ReceptResponseDto
+            {
+                Id = r.Id,
+                Nev = r.Nev,
+                Leiras = r.Leiras,
+                Hozzavalok = r.Hozzavalok,
+                ElkeszitesiIdo = r.ElkeszitesiIdo,
+                NehezsegiSzint = r.NehezsegiSzint,
+                Likes = r.Likes,
+                FeltoltoUsername = r.User?.Username ?? "Unknown",
+                FeltoltveEkkor = r.FeltoltveEkkor,
+                KepUrl = r.KepUrl,
+                Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                MentveVan = mentettReceptIds.Contains(r.Id),
+                LikeolvaVan = likeoltReceptIds.Contains(r.Id)
             }).ToList();
 
             return Ok(responses);
@@ -325,6 +392,9 @@ namespace ReceptekWebAPI.Controllers
             if (string.IsNullOrWhiteSpace(query))
                 return BadRequest("Keresési kifejezés kötelező");
 
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Guid? userId = Guid.TryParse(userIdStr, out var u) ? u : null;
+
             var receptek = await _context.Receptek
                 .Include(r => r.ReceptCimkek).ThenInclude(rc => rc.Cimke)
                 .Include(r => r.User)
@@ -332,6 +402,22 @@ namespace ReceptekWebAPI.Controllers
                             r.Leiras.Contains(query) ||
                             r.Hozzavalok.Contains(query))
                 .ToListAsync();
+
+            List<Guid> mentettReceptIds = new();
+            List<Guid> likeoltReceptIds = new();
+
+            if (userId.HasValue)
+            {
+                mentettReceptIds = await _context.MentettReceptek
+                    .Where(mr => mr.UserId == userId.Value)
+                    .Select(mr => mr.ReceptId)
+                    .ToListAsync();
+
+                likeoltReceptIds = await _context.Likes
+                    .Where(rl => rl.UserId == userId.Value)
+                    .Select(rl => rl.ReceptId)
+                    .ToListAsync();
+            }
 
             var responses = receptek.Select(r => new ReceptResponseDto
             {
@@ -346,7 +432,8 @@ namespace ReceptekWebAPI.Controllers
                 FeltoltveEkkor = r.FeltoltveEkkor,
                 KepUrl = r.KepUrl,
                 Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
-                MentveVan = false
+                MentveVan = mentettReceptIds.Contains(r.Id),
+                LikeolvaVan = likeoltReceptIds.Contains(r.Id)
             }).ToList();
 
             return Ok(responses);
@@ -386,6 +473,16 @@ namespace ReceptekWebAPI.Controllers
                     .Include(x => x.User)
                     .FirstOrDefaultAsync(x => x.Id == id);
 
+                var mentettReceptIds = await _context.MentettReceptek
+                    .Where(mr => mr.UserId == userId)
+                    .Select(mr => mr.ReceptId)
+                    .ToListAsync();
+
+                var likeoltReceptIds = await _context.Likes
+                    .Where(rl => rl.UserId == userId)
+                    .Select(rl => rl.ReceptId)
+                    .ToListAsync();
+
                 var response = new ReceptResponseDto
                 {
                     Id = r!.Id,
@@ -399,7 +496,8 @@ namespace ReceptekWebAPI.Controllers
                     FeltoltveEkkor = r.FeltoltveEkkor,
                     KepUrl = r.KepUrl,
                     Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
-                    MentveVan = false
+                    MentveVan = mentettReceptIds.Contains(r.Id),
+                    LikeolvaVan = likeoltReceptIds.Contains(r.Id)
                 };
 
                 return Ok(response);
@@ -446,6 +544,16 @@ namespace ReceptekWebAPI.Controllers
                     .Include(x => x.User)
                     .FirstOrDefaultAsync(x => x.Id == id);
 
+                var mentettReceptIds = await _context.MentettReceptek
+                    .Where(mr => mr.UserId == userId)
+                    .Select(mr => mr.ReceptId)
+                    .ToListAsync();
+
+                var likeoltReceptIds = await _context.Likes
+                    .Where(rl => rl.UserId == userId)
+                    .Select(rl => rl.ReceptId)
+                    .ToListAsync();
+
                 var response = new ReceptResponseDto
                 {
                     Id = r!.Id,
@@ -459,7 +567,8 @@ namespace ReceptekWebAPI.Controllers
                     FeltoltveEkkor = r.FeltoltveEkkor,
                     KepUrl = r.KepUrl,
                     Cimkek = r.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
-                    MentveVan = false
+                    MentveVan = mentettReceptIds.Contains(r.Id),
+                    LikeolvaVan = likeoltReceptIds.Contains(r.Id)
                 };
 
                 return Ok(response);
@@ -611,30 +720,59 @@ namespace ReceptekWebAPI.Controllers
         [Authorize]
         public async Task<ActionResult> LikeRecept(Guid id)
         {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+                return Unauthorized();
+
             var recept = await _context.Receptek.FindAsync(id);
             if (recept == null)
                 return NotFound("Recept nem található");
+
+            var alreadyLiked = await _context.Likes
+                .AnyAsync(rl => rl.UserId == userId && rl.ReceptId == id);
+
+            if (alreadyLiked)
+                return BadRequest("Ezt a receptet már likeoltad");
+
+            _context.Likes.Add(new Like
+            {
+                UserId = userId,
+                ReceptId = id,
+                LikeoltaEkkor = DateTime.UtcNow
+            });
 
             recept.Likes++;
             await _context.SaveChangesAsync();
 
-            return Ok(new { likes = recept.Likes });
+            return Ok(new { likes = recept.Likes, liked = true });
         }
 
-        [HttpPost("{id:guid}/unlike")]
+        [HttpDelete("{id:guid}/like")]
         [Authorize]
         public async Task<ActionResult> UnlikeRecept(Guid id)
         {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdStr) || !Guid.TryParse(userIdStr, out var userId))
+                return Unauthorized();
+
             var recept = await _context.Receptek.FindAsync(id);
             if (recept == null)
                 return NotFound("Recept nem található");
+
+            var like = await _context.Likes
+                .FirstOrDefaultAsync(rl => rl.UserId == userId && rl.ReceptId == id);
+
+            if (like == null)
+                return BadRequest("Nem likeoltad ezt a receptet");
+
+            _context.Likes.Remove(like);
 
             if (recept.Likes > 0)
                 recept.Likes--;
 
             await _context.SaveChangesAsync();
 
-            return Ok(new { likes = recept.Likes });
+            return Ok(new { likes = recept.Likes, liked = false });
         }
     }
 }
