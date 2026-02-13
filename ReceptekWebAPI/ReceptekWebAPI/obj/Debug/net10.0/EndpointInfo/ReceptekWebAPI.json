@@ -160,6 +160,35 @@
         }
       }
     },
+    "/api/Auth/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Auth": {
       "get": {
         "tags": [
@@ -734,12 +763,18 @@
                     "type": "string"
                   },
                   "Leiras": {
+                    "maxLength": 2000,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "Hozzavalok": {
+                    "maxLength": 2000,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "ElkeszitesiIdo": {
+                    "maximum": 1440,
+                    "minimum": 1,
                     "pattern": "^-?(?:0|[1-9]\\d*)$",
                     "type": [
                       "integer",
@@ -748,6 +783,8 @@
                     "format": "int32"
                   },
                   "NehezsegiSzint": {
+                    "maxLength": 50,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "CimkeIds": {
@@ -974,6 +1011,66 @@
           },
           "required": true
         },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceptResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceptResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReceptResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Recept/{id}/next": {
+      "get": {
+        "tags": [
+          "Recept"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "next"
+            }
+          },
+          {
+            "name": "cimkeId",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1472,7 +1569,7 @@
           },
           "leiras": {
             "maxLength": 2000,
-            "minLength": 0,
+            "minLength": 1,
             "type": [
               "null",
               "string"
@@ -1480,7 +1577,7 @@
           },
           "hozzavalok": {
             "maxLength": 2000,
-            "minLength": 0,
+            "minLength": 1,
             "type": [
               "null",
               "string"
@@ -1498,7 +1595,7 @@
           },
           "nehezsegiSzint": {
             "maxLength": 50,
-            "minLength": 0,
+            "minLength": 1,
             "type": [
               "null",
               "string"
@@ -1622,6 +1719,10 @@
         }
       },
       "UserDto": {
+        "required": [
+          "username",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "username": {

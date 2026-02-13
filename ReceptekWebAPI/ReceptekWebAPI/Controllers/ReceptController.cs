@@ -291,6 +291,104 @@ namespace ReceptekWebAPI.Controllers
             return Ok(responses);
         }
 
+        [HttpGet("{id:guid}/next")]
+        [AllowAnonymous]
+        public async Task<ActionResult<ReceptResponseDto>> GetNext(Guid id, [FromQuery] string direction = "next", [FromQuery] int? cimkeId = null)
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Guid? userId = Guid.TryParse(userIdStr, out var u) ? u : null;
+
+            var current = await _context.Receptek
+                .Include(r => r.ReceptCimkek)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (current == null)
+                return NotFound("Recept nem található");
+
+            var baseQuery = _context.Receptek
+                .Include(r => r.User)
+                .Include(r => r.ReceptCimkek).ThenInclude(rc => rc.Cimke)
+                .AsQueryable();
+
+            if (cimkeId.HasValue)
+            {
+                baseQuery = baseQuery.Where(r => r.ReceptCimkek.Any(rc => rc.CimkeId == cimkeId.Value));
+            }
+
+            Recept? candidate = null;
+
+            if (string.Equals(direction, "prev", StringComparison.OrdinalIgnoreCase))
+            {
+                candidate = await baseQuery
+                    .Where(r => r.FeltoltveEkkor == current.FeltoltveEkkor && r.Id.CompareTo(current.Id) > 0)
+                    .OrderBy(r => r.Id)
+                    .FirstOrDefaultAsync();
+
+                if (candidate == null)
+                {
+                    candidate = await baseQuery
+                        .Where(r => r.FeltoltveEkkor < current.FeltoltveEkkor)
+                        .OrderByDescending(r => r.FeltoltveEkkor)
+                        .ThenBy(r => r.Id)
+                        .FirstOrDefaultAsync();
+                }
+            }
+            else
+            {
+                candidate = await baseQuery
+                    .Where(r => r.FeltoltveEkkor == current.FeltoltveEkkor && r.Id.CompareTo(current.Id) < 0)
+                    .OrderByDescending(r => r.Id)
+                    .FirstOrDefaultAsync();
+
+                if (candidate == null)
+                {
+                    candidate = await baseQuery
+                        .Where(r => r.FeltoltveEkkor > current.FeltoltveEkkor)
+                        .OrderBy(r => r.FeltoltveEkkor)
+                        .ThenByDescending(r => r.Id)
+                        .FirstOrDefaultAsync();
+                }
+            }
+
+            if (candidate == null)
+                return NotFound("Nincs további recept a megadott irányban");
+
+            List<Guid> mentettReceptIds = new();
+            List<Guid> likeoltReceptIds = new();
+
+            if (userId.HasValue)
+            {
+                mentettReceptIds = await _context.MentettReceptek
+                    .Where(mr => mr.UserId == userId.Value)
+                    .Select(mr => mr.ReceptId)
+                    .ToListAsync();
+
+                likeoltReceptIds = await _context.Likes
+                    .Where(rl => rl.UserId == userId.Value)
+                    .Select(rl => rl.ReceptId)
+                    .ToListAsync();
+            }
+
+            var response = new ReceptResponseDto
+            {
+                Id = candidate.Id,
+                Nev = candidate.Nev,
+                Leiras = candidate.Leiras,
+                Hozzavalok = candidate.Hozzavalok,
+                ElkeszitesiIdo = candidate.ElkeszitesiIdo,
+                NehezsegiSzint = candidate.NehezsegiSzint,
+                Likes = candidate.Likes,
+                FeltoltoUsername = candidate.User?.Username ?? "Unknown",
+                FeltoltveEkkor = candidate.FeltoltveEkkor,
+                KepUrl = candidate.KepUrl,
+                Cimkek = candidate.ReceptCimkek.Select(rc => rc.Cimke.CimkeNev).ToList(),
+                MentveVan = mentettReceptIds.Contains(candidate.Id),
+                LikeolvaVan = likeoltReceptIds.Contains(candidate.Id)
+            };
+
+            return Ok(response);
+        }
+
         [HttpGet("my-recipes")]
         [Authorize]
         public async Task<ActionResult<List<ReceptResponseDto>>> GetMyRecipes()

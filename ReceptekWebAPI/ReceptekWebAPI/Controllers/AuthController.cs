@@ -59,6 +59,30 @@ namespace ReceptekWebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("me")]
+        [Authorize]
+        public ActionResult<UserResponseDto> GetMe()
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var username = User.FindFirstValue(ClaimTypes.Name);
+            var role = User.FindFirstValue(ClaimTypes.Role);
+
+            if (string.IsNullOrEmpty(userIdStr) || string.IsNullOrEmpty(username))
+                return Unauthorized();
+
+            if (!Guid.TryParse(userIdStr, out var userId))
+                return Unauthorized();
+
+            var response = new UserResponseDto
+            {
+                Id = userId,
+                Username = username,
+                Role = role
+            };
+
+            return Ok(response);
+        }
+
         [Authorize]
         [HttpGet]
         public IActionResult AuthenticationOnlyEndpoint()
