@@ -46,5 +46,28 @@ namespace ReceptekWebAPI.Controllers
             var dtos = cimkek.Select(c => new CimkeDto { CimkeNev = c.CimkeNev }).ToList();
             return Ok(dtos);
         }
+
+        [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var cimke = await _context.Cimkek.FindAsync(id);
+            if (cimke == null)
+                return NotFound("Címke nem található");
+
+            var kapcsolatok = await _context.ReceptCimkek
+                .Where(rc => rc.CimkeId == id)
+                .ToListAsync();
+
+            if (kapcsolatok.Any())
+            {
+                _context.ReceptCimkek.RemoveRange(kapcsolatok);
+            }
+
+            _context.Cimkek.Remove(cimke);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Címke sikeresen törölve" });
+        }
     }
 }
