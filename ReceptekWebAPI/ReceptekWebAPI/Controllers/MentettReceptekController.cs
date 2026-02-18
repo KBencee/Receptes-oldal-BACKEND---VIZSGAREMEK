@@ -90,7 +90,8 @@ namespace ReceptekWebAPI.Controllers
                     ReceptId = mr.ReceptId,
                     Nev = mr.Recept.Nev,
                     Likes = mr.Recept.Likes,
-                    MentveEkkor = mr.MentveEkkor
+                    MentveEkkor = mr.MentveEkkor,
+                    KepUrl = mr.Recept.KepUrl
                 })
                 .ToListAsync();
 

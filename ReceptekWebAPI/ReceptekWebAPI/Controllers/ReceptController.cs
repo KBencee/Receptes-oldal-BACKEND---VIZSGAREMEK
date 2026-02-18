@@ -253,6 +253,8 @@ namespace ReceptekWebAPI.Controllers
                 .Include(r => r.ReceptCimkek)
                     .ThenInclude(rc => rc.Cimke)
                 .Include(r => r.User)
+                .OrderByDescending(r => r.FeltoltveEkkor)
+                .ThenBy(r => r.Id)
                 .ToListAsync();
 
             List<Guid> mentettReceptIds = new();

@@ -6,5 +6,6 @@
         public string Nev { get; set; } = string.Empty;
         public int Likes { get; set; }
         public DateTime MentveEkkor { get; set; }
+        public string KepUrl { get; set; } = string.Empty;
     }
 }
